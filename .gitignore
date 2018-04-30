@@ -1,3 +1,4 @@
 .idea/
 *.pyc
 god_mode/__pycache__/
+local_settings.py
