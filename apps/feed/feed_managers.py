@@ -1,29 +1,30 @@
 from stream_framework.feed_managers.base import Manager, FanoutPriority
-from apps.feed.like_feed import LikeFeed, AggregatedLikeFeed, UserLikeFeed
-from apps.feed.models import Follow
+
+from apps.feed.pin_feed import PinFeed, AggregatedPinFeed, UserPinFeed
 
 
-class LikeManager(Manager):
+class PinManager(Manager):
     # this example has both a normal feed and an aggregated feed (more like
     # how facebook or wanelo uses feeds)
     feed_classes = dict(
-        normal=LikeFeed,
-        aggregated=AggregatedLikeFeed
+        normal=PinFeed,
+        aggregated=AggregatedPinFeed
     )
-    user_feed_class = UserLikeFeed
+    user_feed_class = UserPinFeed
 
-    def add_like(self, like):
-        activity = like.create_activity()
+    def add_pin(self, pin):
+        activity = pin.create_activity()
         # add user activity adds it to the user feed, and starts the fanout
-        self.add_user_activity(like.user_id, activity)
+        self.add_user_activity(pin.user_id, activity)
 
-    def remove_like(self, like):
-        activity = like.create_activity()
+    def remove_pin(self, pin):
+        activity = pin.create_activity()
         # removes the pin from the user's followers feeds
-        self.remove_user_activity(like.user_id, activity)
+        self.remove_user_activity(pin.user_id, activity)
 
     def get_user_follower_ids(self, user_id):
+        from apps.feed.models import Follow
         ids = Follow.objects.filter(target=user_id).values_list('user_id', flat=True)
         return {FanoutPriority.HIGH:ids}
 
-manager = LikeManager()
+manager = PinManager()

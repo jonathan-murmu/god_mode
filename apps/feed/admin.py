@@ -1,8 +1,9 @@
 from django.contrib import admin
-from apps.feed.models import Posts, Follow, Like, Tweet, Hashtag
 
-admin.site.register(Posts)
-admin.site.register(Like)
+# Register your models here.
+from apps.feed.models import Item, Board, Pin, Follow
+
+admin.site.register(Item)
+admin.site.register(Board)
+admin.site.register(Pin)
 admin.site.register(Follow)
-admin.site.register(Tweet)
-admin.site.register(Hashtag)

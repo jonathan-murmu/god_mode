@@ -41,7 +41,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
-    'stream_django',
+    'djcelery'
 ]
 
 PROJECT_APPS = [
@@ -137,6 +137,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+CELERY_ALWAYS_EAGER = True
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+
+import djcelery
+djcelery.setup_loader()
 
 try:
     from .local_settings import *

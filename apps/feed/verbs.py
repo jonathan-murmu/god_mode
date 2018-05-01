@@ -2,9 +2,9 @@ from stream_framework.verbs import register
 from stream_framework.verbs.base import Verb
 
 
-class Like(Verb):
+class Pin(Verb):
     id = 5
-    infinitive = 'like'
-    past_tense = 'liked'
+    infinitive = 'pin'
+    past_tense = 'pinned'
 
-register(Like)
+register(Pin)

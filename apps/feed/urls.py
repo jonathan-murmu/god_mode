@@ -1,6 +1,7 @@
 from django.urls import path
-from apps.feed.views import TimeLine
+
+from apps.feed import views
 
 urlpatterns = [
-    path('timeline/', TimeLine.as_view(), name='feed-timeline')
+    path('timeline/', views.TimeLine.as_view(), name='timeline')
 ]
