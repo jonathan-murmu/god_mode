@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from apps.slack.views import Events
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 
-    path('feed/', include('apps.feed.urls'))
+    path('feed/', include('apps.feed.urls')),
+    path(r'events/', Events.as_view()),
 ]
